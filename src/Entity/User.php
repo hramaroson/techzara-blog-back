@@ -4,17 +4,37 @@
  *
  * This file is part of techzara blog
  */
+declare(strict_types=1);
+
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     forceEager=false,
+ *     collectionOperations={
+ *       "get","post"
+ *     },
+ *     itemOperations={
+ *       "get",
+ *       "put" = {"security"="is_granted('ROLE_ADMIN') or object == user"}
+ *     },
+ *     normalizationContext={"groups"={"read"},"enable_max_depth"=true},
+ *     denormalizationContext={"groups"={"write"},"enable_max_depth"=true}
+ * )
  *
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
@@ -26,53 +46,114 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @ApiProperty(identifier=false)
      */
-    private $id;
+    private ?int $id;
+
+    /**
+     * The internal primary identity key.
+     *
+     * @var UuidInterface
+     *
+     * @ORM\Column(type="uuid", unique=true)
+     *
+     * @ApiProperty(identifier=true)
+     *
+     * @Groups("read")
+     */
+    private ?UuidInterface $uuid;
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
      *
      * @Assert\NotBlank()
+     *
+     * @Groups({"read", "write"})
      */
-    private $username;
+    private string $username;
 
     /**
      * @ORM\Column(type="string", length=150)
      *
-     * @Assert\NotBlank()
+     * @Assert\Email()
+     *
+     * @Groups({"read", "write"})
      */
-    private $email;
+    private string $email;
 
     /**
-     * @ORM\Column(type="text")
-     *
-     * @Assert\NotBlank()
+     * @ORM\Column(type="text", nullable=false)
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     *
+     * @Groups({"read", "write"})
      */
-    private $pseudo;
+    private ?string $pseudo;
 
     /**
      * @ORM\Column(type="json")
+     *
+     * @Groups({"read", "write"})
      */
-    private $roles = [];
+    private array $roles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Blog::class, mappedBy="user")
+     *
+     * @Groups("read")
+     */
+    private ?Collection $blogs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reaction::class, mappedBy="user")
+     */
+    private ?Collection $reactions;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @SerializedName("password")
+     *
+     * @Assert\NotBlank()
+     *
+     * @Groups("write")
      */
-    private $salt;
+    private ?string $plainPassword;
 
     /**
-     * @return int|null
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     */
+    private ?Collection $comments;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->uuid = Uuid::uuid4();
+        $this->blogs = new ArrayCollection();
+        $this->reactions = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
      */
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return UuidInterface
+     */
+    public function getUuid(): UuidInterface
+    {
+        return $this->uuid;
     }
 
     /**
@@ -168,13 +249,13 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $roles
+     * @param array $roles
      *
      * @return User
      */
-    public function setRoles(string $roles): User
+    public function setRoles(?array $roles): User
     {
-        $this->roles[] = $roles;
+        $this->roles = !empty($roles) ? $roles : ['ROLE_USER'];
 
         return $this;
     }
@@ -184,7 +265,27 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        return $this->salt;
+        return null;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string|null $plainPassword
+     *
+     * @return User
+     */
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 
     /**
@@ -192,6 +293,119 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        return $this->setPlainPassword(null);
+    }
+
+    /**
+     * @return Collection|Blog[]
+     */
+    public function getBlogs(): Collection
+    {
+        return $this->blogs;
+    }
+
+    /**
+     * @param Blog $blog
+     *
+     * @return $this
+     */
+    public function addBlog(Blog $blog): self
+    {
+        if (!$this->blogs->contains($blog)) {
+            $this->blogs[] = $blog;
+            $blog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Blog $blog
+     *
+     * @return $this
+     */
+    public function removeBlog(Blog $blog): self
+    {
+        if ($this->blogs->contains($blog)) {
+            $this->blogs->removeElement($blog);
+            // set the owning side to null (unless already changed)
+            if ($blog->getUser() === $this) {
+                $blog->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reaction[]
+     */
+    public function getReactions(): Collection
+    {
+        return $this->reactions;
+    }
+
+    /**
+     * @param Reaction $reaction
+     *
+     * @return $this
+     */
+    public function addReaction(Reaction $reaction): self
+    {
+        if (!$this->reactions->contains($reaction)) {
+            $this->reactions[] = $reaction;
+            $reaction->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Reaction $reaction
+     *
+     * @return $this
+     */
+    public function removeReaction(Reaction $reaction): self
+    {
+        if ($this->reactions->contains($reaction)) {
+            $this->reactions->removeElement($reaction);
+            // set the owning side to null (unless already changed)
+            if ($reaction->getUser() === $this) {
+                $reaction->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
