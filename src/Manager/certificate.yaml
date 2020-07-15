@@ -1,0 +1,300 @@
+lucoram:
+  name: 'Ramaromanana Luco N.'
+  mention: 5
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+ezakaMirindra:
+  name: 'Raholiarisoa Mirindra M.'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Frontend
+
+Todisoa:
+  name : 'RABEKOTO Tsiresy'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+Henintsoo:
+  name : 'Hasin’ny Aina Henintsoa'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+RMK:
+  name: 'Randriajaoson Ando L.'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+StevyJs:
+  name: 'Ralambomanana Safidy T.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Frontend
+
+BlackHawkKevin:
+  name: 'Rambalason Tsiory Kevin'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+BlackHawkFy:
+  name: 'Rakotondrabe Fy'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+Nasaina:
+  name: 'Andrianarijaona Nasainarivelo'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Frontend
+
+TheTeamNirilala:
+  name: 'Rakotondrasoa Nirilala'
+  mention: 5
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+TheTeamAndrianina:
+  name: 'Herimandimby Andrianina'
+  mention: 5
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+GarinaL:
+  name: 'Rinasoa Garina Jean M.'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+NomenyiTech:
+  name: 'Tsilavitiana Nomenjanahary'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+tebokaRoa:
+  name: 'RANDRIAMANANTSOA To'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+Finaritrandr:
+  name: 'Andrianiaina Finaritra H.'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+Nyainaraza:
+  name: 'Razafindratsima Ny Aina'
+  mention: 5
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+bbtRado:
+  name: 'Rado Andriamaro'
+  mention: 5
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+bbtFanantenana:
+  name: 'Fanantenana Andrianirina'
+  mention: 5
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+rianaN:
+  name: 'Ranorosoa Riana N.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Frontend
+
+heryM:
+  name: 'Herimandimby Jerry'
+  mention: 2
+  challenge: 'WCC Initial Commit'
+  type: Frontend
+
+
+cypher:
+  name: 'Ravelojaona Mathias'
+  mention: 5
+  challenge: 'WCC Initial Commit'
+  type: Frontend
+
+tex:
+  name: 'Raherimanjaka Thierry'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+fahazaravana:
+  name: 'Randrianantenaina Jean Lucien'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+mahalinoro_r:
+  name: 'Mahalinoro Razafimanjato'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+JohnNiaina:
+  name: 'Tsarahasiniaina Jonathan'
+  mention: 2
+  challenge: 'WCC Initial Commit'
+  type: Frontend
+
+lucio_r1:
+  name: 'Lucio RAZAFINDRAINIBE'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+puchka:
+  name: 'Marius Rabenaivo'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+TensorEleven:
+  name: 'Harivony Ratefiarison'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+rjn:
+  name: 'Rajaonarivelo Rojonirina'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+MiDev:
+  name: 'Rakotoarinivo Miranto F.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+raveloMeva:
+  name: 'Ravelo Meva Soavina'
+  mention: 5
+  challenge: 'Certificate Challenge'
+  type: Frontend
+
+Unviray:
+  name: 'Unviray'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+r_gamechanger:
+  name: 'Ny Andrianina Mamy'
+  mention: 4
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+tiantsoa_r:
+  name: 'Ratsimbazafy Tiantsoa T.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+sandratrah_r:
+  name: 'Rakotonanahary Sandratrahasina'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+langaha69:
+  name: 'Meminiaina Zo Hasina'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+Feno:
+  name: 'Andriamorasata Fenomanjato'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+tenerivoso_j:
+  name: 'Tenarivoson Jhon Edelph'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+jnSitrakaPrudence:
+  name: 'Ravelontsoa Jean Prudence'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+jPrudence:
+  name: 'Ravelontsoa Jean Prudence'
+  mention: 5
+  challenge: 'Certificate Challenge'
+  type: Frontend
+
+jnSitraka:
+  name: 'Jean Narivelo Lala S.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+zandryKely:
+  name: 'Randrianarivo Fanomezantsoa S.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+Thino:
+  name: 'Rakotomalala Berthino S.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+Tsierenana_G:
+  name: 'Tsierenana Bôtramanagna G.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+acf-patrick:
+  name: 'Tojoniaina Patrick'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+dunnoDodi:
+  name: 'Randrianaivomanana Andritiana'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+jasmin_20:
+  name: 'Tolojanahary Fandresena J.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+KoloinaTetra:
+  name: 'Razakandraibe Koloina M.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo
+
+Manda:
+  name: 'Narizafy Mario.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Dev
+
+sarobidy:
+  name: 'Razafitsalama Fin Luc S.'
+  mention: 3
+  challenge: 'WCC Initial Commit'
+  type: Algo

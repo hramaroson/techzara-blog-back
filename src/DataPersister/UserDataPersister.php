@@ -17,8 +17,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserDataPersister implements DataPersisterInterface
 {
+    /** @var EntityManagerInterface  */
     private EntityManagerInterface $entityManager;
 
+    /** @var UserPasswordEncoderInterface */
     private UserPasswordEncoderInterface $encoder;
 
     /**
@@ -47,8 +49,9 @@ class UserDataPersister implements DataPersisterInterface
     public function persist($data)
     {
         if ($data instanceof User && $data->getPlainPassword()) {
-            $data->setPassword($this->encoder->encodePassword($data, $data->getPlainPassword()));
-            $data->eraseCredentials();
+            $data->setRoles(['ROLE_USER'])
+                ->setPassword($this->encoder->encodePassword($data, $data->getPlainPassword()))
+                ->eraseCredentials();
         }
 
         $this->entityManager->persist($data);
